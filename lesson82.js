@@ -129,27 +129,42 @@ function MessageBox(
 
     const img = document.createElement("img");
     img.src = this.imageIcon;
-
     d.append(img);
     return d;
   };
 }
-const info = new MessageBox("black", "green", "info.jpg", {
+//2
+const info1 = new MessageBox("black", "green", "./info.jpg", {
   title: "info",
-  body: "tehila miller",
+  body: "about books",
 });
+document.body.append(info1.render());
 
-document.body.append(info.render());
-const error = new MessageBox("black", "red", "error.jpg", {
-  title: "error",
-  body: "tehila miller",
-});
-
-document.body.append(error.render());
-const worning = new MessageBox("black", "yellow", "warning.jpg", {
+const warning1 = new MessageBox("black", "yellow", "./warning.jpg", {
   title: "warning",
-  body: "tehila miller",
+  body: "be careful",
 });
+document.body.append(warning1.render());
 
-document.body.append(worning.render());
+const error1 = new MessageBox("white", "red", "./error.jpg", {
+  title: "error",
+  body: "404 not found",
+});
+document.body.append(error1.render());
 //3
+const message = { info: info1, warning: warning1, error: error1 };
+//5
+document.getElementById("ok").addEventListener("click", function () {
+  const typemes = document.getElementById("typ").value;
+  const titlemes = document.getElementById("tit").value;
+  const bodyemes = document.getElementById("bod").value;
+
+  const s = message[typemes];
+  s.message.title = titlemes;
+  s.message.body = bodyemes;
+
+  const m = document.getElementById("dismes");
+  const newMessage = s.render();
+  m.replaceWith(newMessage);
+  newMessage.id = "dismes";
+});
